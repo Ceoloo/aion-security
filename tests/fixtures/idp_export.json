@@ -1,0 +1,11 @@
+{
+  "identities": [
+    {"id": "u-admin-ok", "username": "ops-admin@example.com", "kind": "human", "status": "active", "privileged": true, "mfa_factors": ["webauthn"]},
+    {"id": "u-ok", "username": "dev@example.com", "kind": "human", "status": "active", "mfa_factors": ["TOTP", "sms"]},
+    {"id": "u-weak", "username": "sales@example.com", "kind": "human", "status": "active", "mfa_factors": ["sms"]},
+    {"id": "u-admin-none", "username": "root-admin@example.com", "kind": "human", "status": "active", "privileged": true, "mfa_factors": []},
+    {"id": "u-none", "username": "intern@example.com", "kind": "human", "status": "active"},
+    {"id": "u-suspended", "username": "former@example.com", "kind": "human", "status": "suspended"},
+    {"id": "svc-ci", "username": "ci-bot", "kind": "service", "status": "active"}
+  ]
+}

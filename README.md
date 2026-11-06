@@ -53,7 +53,7 @@ SIEM.
 
 | Team | Fit | Production constraint |
 | --- | --- | --- |
-| **Blue** ([`blue/`](blue/)) | Home for Continuous Assurance *operations* that need too many connectors to live in Runtime | Observe → recommend → **human approve** → remediate → verify. R3 is always gated. |
+| **Blue** ([`blue/`](src/aion_security/blue/)) | Home for Continuous Assurance *operations* that need too many connectors to live in Runtime | Observe → recommend → **human approve** → remediate → verify. R3 is always gated. |
 | **Red** ([`red/`](red/)) | Home for attack simulations and readiness probes | Separate mission and tenant. Assist/Observe by default. Any Execute against a live system goes through the gateway with grants. No silent prod writes. |
 
 Blue comes first (customer-zero / TechOps). Red is **disabled** until the
@@ -63,13 +63,19 @@ proof.
 ## Layout
 
 ```
-docs/adr/         Architecture decisions for this satellite
-connectors/       Read-only adapters to external telemetry (scanner, IdP, EDR, cloud)
-blue/             CA check runners: map CA catalog controls → connector queries → findings
-red/              Adversarial playbooks + harnesses (gated; see red/README.md)
-evidence/         Evidence packaging for audits / CA reports (writes via Runtime → aion-data)
-delivery-kits/    Client-facing kits that consume Runtime APIs
+docs/adr/                       Architecture decisions for this satellite
+src/aion_security/
+  connectors/                   Read-only adapters to external telemetry (scanner, IdP, EDR, cloud)
+  blue/                         CA check runners: CA control → connector query → findings
+  evidence/                     Evidence fingerprinting / packaging (persisted via Runtime → aion-data)
+  runtime_client.py             The only path to platform state (/v1/assurance, /v1/commands)
+red/                            Adversarial playbooks + harnesses (gated; see red/README.md)
+delivery-kits/                  Client-facing kits that consume Runtime APIs
+tests/
 ```
+
+Quick start: `pip install -e '.[dev]' && pytest`, then see
+[`src/aion_security/blue/README.md`](src/aion_security/blue/README.md).
 
 ## Rules of the road
 

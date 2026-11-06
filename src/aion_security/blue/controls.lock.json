@@ -1,0 +1,7 @@
+{
+  "_comment": "Pins each check to a CA catalog control in aion-docs (ID + version). Values must be copied from aion-docs, never invented here. A check whose control is UNPINNED can run in dry-run mode but cannot report to Runtime.",
+  "idp-mfa": {
+    "id": "UNPINNED",
+    "version": "UNPINNED"
+  }
+}
